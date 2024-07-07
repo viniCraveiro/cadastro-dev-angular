@@ -1,0 +1,60 @@
+@import '../../../variables.scss';
+
+.container {
+  width: 15rem;
+  flex-direction: column;
+  padding-top: 3rem;
+}
+
+.container-info {
+  background-color: $bg-color;
+  width: 14.5rem;
+  padding-left: 0.5rem;
+  padding-top: 2rem;
+  position: relative;
+  border-radius: 3px;
+}
+
+.container-info p {
+  color: #FFFFFF;
+  font-weight: 400;
+  font-size: 15px;
+  padding-top: 1.5px;
+}
+
+.avatar {
+  position: absolute;
+  top: -30px;
+  left: 80%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  border: 3px solid $bg-color;
+  width: 58px;
+  height: 58px;
+}
+
+.container-footer {
+  @extend .container-info;
+  padding: 0.5rem 0 0.5rem 0;
+  display: grid;
+  grid-template-columns: 3fr 0.5fr 0.5fr;
+  gap: 0.7rem;
+}
+
+.container-footer button{
+  background-color: transparent;
+  outline: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.container-footer p button  {
+  font-weight: 500;
+  font-size: 14px;
+  color: #68D391;
+}
+
+.container-footer span button i {
+  justify-self: end;
+  font-size: 18px;
+}

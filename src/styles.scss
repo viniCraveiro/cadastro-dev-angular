@@ -1,1 +1,77 @@
 /* You can add global styles to this file, and also import other style files */
+@import './variables.scss';
+
+* {
+  font-family: "Roboto", sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.alignItensCenter {
+  align-items: center;
+}
+
+.alignContentCenter {
+  align-content: center;
+}
+
+.console-log {
+  border: 1px solid red;
+}
+
+//INPUT FORM
+.input-form {
+  height: 40px;
+  border-radius: 3px;
+  padding: 0.25rem;
+  border: 2px solid #A0AEC0;
+  font-size: 1rem;
+  transition: border-color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s, color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s, background 0.2s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
+  box-sizing: border-box;
+}
+
+.input-form-disabled {
+  background-color: #CFD8E3;
+  border-color: #A0AEC0;
+  color: #A0AEC0;
+  cursor: not-allowed;
+}
+
+.input-form:hover,
+.input-form:focus,
+.input-group:hover .input-form {
+  outline: none;
+  border-color: $bg-color;
+}
+
+.input-group:hover .label-form,
+.input-form:focus {
+  color: #000000;
+}
+
+.label-form {
+  display: block;
+  margin-top: 0.10rem;
+  font-size: 12px;
+  line-height: 21.09px;
+  font-weight: 500;
+  color: #2D3748;
+  transition: color 0.3s cubic-bezier(0.25, 0.01, 0.25, 1) 0s;
+}
+
+.label-form-disabled {
+  color: #7E8288;
+  display: block;
+  margin-top: 0.10rem;
+  font-size: 12px;
+  line-height: 21.09px;
+  font-weight: 500;
+}

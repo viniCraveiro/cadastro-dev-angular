@@ -1,0 +1,47 @@
+<app-topbar />
+<div class="container">
+  <div class="container-form">
+    <form class="form">
+      <button class="button-register-github">
+        <i class="fa-brands fa-github" style="font-size: 21px;"></i>
+        <span>Cadastrar com GitHub</span>
+      </button>
+      <div appInputGroup>
+        <label for="">Usuário Github</label>
+        <input type="text" disabled />
+      </div>
+      <div class="spacer"></div>
+      <div appInputGroup>
+        <label for="">Avatar (URL)</label>
+        <input type="text" />
+      </div>
+      <div appInputGroup>
+        <label for="">Nome</label>
+        <input type="text" />
+      </div>
+      <div appInputGroup>
+        <label for="">Email</label>
+        <input type="email" />
+      </div>
+      <div appInputGroup>
+        <label for="">Cidade</label>
+        <input type="text" />
+      </div>
+      <div class="spacer"></div>
+      <p class="info textCenter">PROFISSIONAL</p>
+      <div appInputGroup>
+        <label for="">Formação</label>
+        <input type="text" />
+      </div>
+      <div appInputGroup>
+        <label for="">Tecnologias</label>
+        <input type="text" />
+      </div>
+      <button class="button-register">Cadastrar</button>
+    </form>
+    <div class="flex" style="padding-left: 2.35rem; gap: 1.65rem; margin-top: 27px;">
+      <app-card-dev />
+      <app-card-dev />
+    </div>
+  </div>
+</div>

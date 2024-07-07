@@ -1,0 +1,35 @@
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #718096;
+}
+
+.container {
+  display: inline-block;
+  background-color: #2D3748;
+  position: relative;
+  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+  align-items: center;
+  text-align: center;
+  align-content: center;
+  border-radius: 3px;
+}
+
+.container input {
+  outline: none;
+  border: none;
+  color: #FFFFFF;
+  font-weight: 400;
+  margin-right: 1.2rem;
+  width: 90%;
+}
+
+input {
+  background-color: transparent;
+}
+
+button {
+  background-color: transparent;
+}
