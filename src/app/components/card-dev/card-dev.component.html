@@ -1,13 +1,15 @@
 <div class="flex container">
   <div class="container-info">
-    <img
-      src="https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-      class="avatar" alt="">
-    <p>João da Silva</p>
-    <p>Maringá-PR</p>
-    <p>Angular, JQuery, Vue</p>
+    <img [src]="data.avatarURL || 'https://avatars.githubusercontent.com/u/1?v=4'" class="avatar" alt="">
+    <p>{{data.name}}</p>
+    <p>{{data.city}}</p>
+    <p>{{data.technologies}}</p>
     <div class="flex container-footer">
-      <p><button>Acessar GitHub</button></p>
+      @if (data.userGithub !== '') {
+      <p><button (click)="openGitHub()">Acessar GitHub</button></p>
+      } @else {
+      <p></p>
+      }
       <span>
         <button>
           <i class="fa-regular fa-pen-to-square" style="color: #4299E1;"></i>

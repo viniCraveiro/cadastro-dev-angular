@@ -4,28 +4,30 @@
   width: 15rem;
   flex-direction: column;
   padding-top: 3rem;
+
 }
 
 .container-info {
   background-color: $bg-color;
-  width: 14.5rem;
+  width: 18rem;
   padding-left: 0.5rem;
   padding-top: 2rem;
   position: relative;
   border-radius: 3px;
+  box-shadow: 0px 2px 4px 0px #00000013;
 }
 
 .container-info p {
   color: #FFFFFF;
   font-weight: 400;
   font-size: 15px;
-  padding-top: 1.5px;
+  padding-top: 7px;
 }
 
 .avatar {
   position: absolute;
   top: -30px;
-  left: 80%;
+  left: 84%;
   transform: translateX(-50%);
   border-radius: 50%;
   border: 3px solid $bg-color;
@@ -41,14 +43,14 @@
   gap: 0.7rem;
 }
 
-.container-footer button{
+.container-footer button {
   background-color: transparent;
   outline: none;
   border: 0;
   cursor: pointer;
 }
 
-.container-footer p button  {
+.container-footer p button {
   font-weight: 500;
   font-size: 14px;
   color: #68D391;

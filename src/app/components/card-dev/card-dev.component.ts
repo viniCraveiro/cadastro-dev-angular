@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { TDev } from '../../pages/cadastrar-dev/cadastrar-dev.model';
 
 @Component({
   selector: 'app-card-dev',
@@ -8,5 +9,13 @@ import { Component } from '@angular/core';
   styleUrl: './card-dev.component.scss'
 })
 export class CardDevComponent {
+
+  @Input()
+  data!: TDev;
+
+  openGitHub() {
+    window.open('https://github.com/' + this.data.userGithub, '_blank');
+  }
+
 
 }
