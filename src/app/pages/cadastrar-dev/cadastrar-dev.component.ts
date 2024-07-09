@@ -24,30 +24,29 @@ import { devsSelector } from './state/cadastrar-dev.selectors';
   styleUrl: './cadastrar-dev.component.scss'
 })
 export class CadastrarDevComponent implements OnInit {
-
-  form = new FormGroup({
-    userGithub: new FormControl(''),
-    avatarURL: new FormControl(''),
-    name: new FormControl(''),
-    email: new FormControl(''),
-    city: new FormControl(''),
-    formation: new FormControl(''),
-    technologies: new FormArray([]),
-  });
-
+  form!: FormGroup;
   devs: TDev[] = [];
 
   cadastrarDevService = inject(CadastrarDevService);
   store = inject(Store);
-
   devs$ = this.store.select(devsSelector);
 
   ngOnInit(): void {
-    this.store.dispatch(cadastrarDevActions.loadDevs());
+    this.form = new FormGroup({
+      userGithub: new FormControl(''),
+      avatarURL: new FormControl(''),
+      name: new FormControl(''),
+      email: new FormControl(''),
+      city: new FormControl(''),
+      formation: new FormControl(''),
+      technologies: new FormArray([]),
+    });
+
     this.getAllDevs();
   }
 
   getAllDevs() {
+    this.store.dispatch(cadastrarDevActions.loadDevs());
     this.devs$
       .subscribe({
         next: (devs) => {

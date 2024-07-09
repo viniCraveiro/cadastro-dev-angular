@@ -17,5 +17,4 @@ export class CardDevComponent {
     window.open('https://github.com/' + this.data.userGithub, '_blank');
   }
 
-
 }

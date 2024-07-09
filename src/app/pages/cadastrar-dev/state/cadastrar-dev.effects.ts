@@ -1,8 +1,8 @@
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { CadastrarDevService } from '../service/cadastrar-dev.service';
 import { inject } from '@angular/core';
-import { cadastrarDevActions } from './cadastrar-dev.actions';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap, tap } from 'rxjs';
+import { CadastrarDevService } from '../service/cadastrar-dev.service';
+import { cadastrarDevActions } from './cadastrar-dev.actions';
 
 export const findAllDevsEffect = createEffect(
   (actions$ = inject(Actions), cadastrarDevService = inject(CadastrarDevService)) => {

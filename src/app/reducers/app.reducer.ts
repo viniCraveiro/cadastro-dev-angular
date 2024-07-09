@@ -1,17 +1,12 @@
-import { isDevMode } from '@angular/core';
 import {
-  ActionReducerMap,
-  MetaReducer
+  ActionReducerMap
 } from '@ngrx/store';
 import { devReducer, IDevState } from '../pages/cadastrar-dev/state/cadastrar-dev.reducer';
 
 export interface State {
-  devs: IDevState
+  devs: IDevState;
 }
 
 export const reducers: ActionReducerMap<State> = {
   devs: devReducer
 };
-
-
-export const metaReducers: MetaReducer<State>[] = isDevMode() ? [] : [];
