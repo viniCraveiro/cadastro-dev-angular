@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { ToastrService } from 'ngx-toastr';
 import { InputGroupDirective } from '../../common/directives/input/input-group.directive';
 import { CardDevComponent } from '../../components/card-dev/card-dev.component';
 import { TopbarComponent } from '../../layout/topbar/topbar.component';
+import { AuthService } from '../../services/auth.service';
 import { TDev } from './cadastrar-dev.model';
 import { CadastrarDevService } from './service/cadastrar-dev.service';
 import { cadastrarDevActions } from './state/cadastrar-dev.actions';
@@ -29,15 +30,25 @@ export class CadastrarDevComponent implements OnInit {
   devs: TDev[] = [];
   isEditing = false;
   submitted = false;
+  token = '';
 
   cadastrarDevService = inject(CadastrarDevService);
   store = inject(Store);
   devs$ = this.store.select(devsSelector);
-  toast = inject(ToastrService);
+  router = inject(ActivatedRoute);
+  authService = inject(AuthService);
 
   ngOnInit(): void {
+
+    this.router.queryParams.subscribe((params) => {
+      if (params['code']) {
+        const code = params['code'];
+        this.getAccessTokenGithub(code);
+      }
+    });
+
     this.form = new FormGroup({
-      _id: new FormControl(''),
+      _id: new FormControl(null),
       userGithub: new FormControl({ value: null, disabled: true }),
       avatarURL: new FormControl(''),
       name: new FormControl('', [Validators.required]),
@@ -49,8 +60,6 @@ export class CadastrarDevComponent implements OnInit {
 
     this.getAllDevs();
   }
-
-
 
   getAllDevs() {
     this.store.dispatch(cadastrarDevActions.loadDevs());
@@ -103,6 +112,49 @@ export class CadastrarDevComponent implements OnInit {
     this.form.reset();
     this.submitted = false;
     this.isEditing = false;
+  }
+
+  getAccessTokenGithub(code: string) {
+    this.authService.getAccessToken(code).subscribe({
+      next: (response) => {
+        this.token = response.access_token;
+        if (this.token) {
+          this.getUserData(this.token);
+        }
+      },
+      error: (error) => {
+        console.error('Erro ao recuperar token: ', error);
+      }
+    });
+  }
+
+  getUserData(token: string) {
+    this.authService.getUserData(token).subscribe({
+      next: (data) => {
+        const { login, avatar_url, name, email } = data;
+        const dataForm = {
+          userGithub: login,
+          avatarURL: avatar_url,
+          name: name,
+          email: email
+        };
+        this.form.patchValue(dataForm);
+      },
+      error: (error) => {
+        console.error('Erro ao buscar dados do usuario:', error);
+      }
+    });
+  }
+
+  openGitHub() {
+    this.authService.getLinkCodeClientId().subscribe({
+      next: (value) => {
+        window.open(value.link, '_self');
+      },
+      error: (error) => {
+        console.error('Error:', error);
+      }
+    });
   }
 
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { TDev } from '../cadastrar-dev.model';
 import { Observable } from 'rxjs';
+import { IGitHubDataUser, TDev } from '../cadastrar-dev.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class CadastrarDevService {
 
   readonly BASE_URL = 'http://localhost:3000';
-  private apiUrl = 'https://api.github.com/users';
+  readonly API_GITHUB_URL = 'https://api.github.com/users';
 
   constructor(protected http: HttpClient) { }
 
@@ -34,15 +34,12 @@ export class CadastrarDevService {
   }
 
   getUser(username: string): Observable<IGitHubDataUser> {
-    return this.http.get<IGitHubDataUser>(`${this.apiUrl}/${username}`);
+    return this.http.get<IGitHubDataUser>(`${this.API_GITHUB_URL}/${username}`);
   }
-}
 
-export interface IGitHubDataUser {
-  login: string,
-  avatar_url: string,
-  html_url: string,
-  name: string,
-  location: string,
-  email: string,
+  search(username: string) {
+    return this.http.get<TDev[]>(`${this.BASE_URL}/users/search/name`, { params: { name: username } });
+  }
+
+
 }

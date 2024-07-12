@@ -1,5 +1,5 @@
 <div class="container" [ngStyle]="{'width': width}" >
 
-  <input type="text"  >
+  <input type="text"  (input)="onSearch($event)">
     <i class="fa-solid fa-magnifying-glass search-icon" ></i>
 </div>

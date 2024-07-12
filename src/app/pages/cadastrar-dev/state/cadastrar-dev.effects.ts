@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, switchMap, tap } from 'rxjs';
+import { map, switchMap } from 'rxjs';
 import { CadastrarDevService } from '../service/cadastrar-dev.service';
 import { cadastrarDevActions } from './cadastrar-dev.actions';
 
@@ -48,9 +48,22 @@ const editDevEffect = createEffect(
       ));
   }, { functional: true });
 
+const searchDevEffect = createEffect(
+  (actions$ = inject(Actions), cadastrarDevService = inject(CadastrarDevService)) => {
+    return actions$.pipe(
+      ofType(cadastrarDevActions.searchDev),
+      switchMap((action) => cadastrarDevService.search(action.username)
+        .pipe(
+          map((devs) => cadastrarDevActions.loadDevsSucess({ devs })),
+        )
+      ));
+  }, { functional: true }
+);
+
 export const cadastrarDevsEffects = {
   findAllDevsEffect,
   registerDevEffect,
   removeDevEffect,
-  editDevEffect
+  editDevEffect,
+  searchDevEffect
 };

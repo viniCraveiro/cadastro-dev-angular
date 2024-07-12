@@ -41,6 +41,7 @@
   grid-template-columns: 3fr 0.5fr 0.5fr;
   gap: 0.7rem;
   min-height: 25px;
+  align-items: center;
 }
 
 .container-footer button {
@@ -49,6 +50,11 @@
   border: 0;
   cursor: pointer;
 }
+
+.container-footer p {
+  padding: 0;
+}
+
 
 .container-footer p button {
   font-weight: 500;

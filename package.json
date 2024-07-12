@@ -25,7 +25,6 @@
     "@ngrx/effects": "^18.0.1",
     "@ngrx/store": "^18.0.1",
     "font-awesome": "^4.7.0",
-    "ngx-toastr": "^19.0.0",
     "npm": "^10.8.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

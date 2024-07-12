@@ -6,6 +6,7 @@ const loadDevsSucess = createAction('[CadastrarDev] Load Devs Sucess', props<{ d
 const registerDev = createAction('[CadastrarDev] Register Dev', props<TRegisterDev>());
 const removeDev = createAction('[CadastrarDev] Remove Dev', props<{ id: string; }>());
 const editDev = createAction('[CadastrarDev] Edit Dev', props<TDev>());
+const searchDev = createAction('[CadastrarDev] Search Dev', props<{ username: string; }>());
 
 export const cadastrarDevActions = {
   loadDevs,
@@ -13,4 +14,5 @@ export const cadastrarDevActions = {
   registerDev,
   removeDev,
   editDev,
+  searchDev,
 };

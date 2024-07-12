@@ -12,3 +12,12 @@ export type TDev = {
   avatarURL: string | null;
   userGithub?: string | null;
 };
+
+export interface IGitHubDataUser {
+  login: string,
+  avatar_url: string,
+  html_url: string,
+  name: string,
+  location: string,
+  email: string,
+}
