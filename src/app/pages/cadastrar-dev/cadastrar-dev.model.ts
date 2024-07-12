@@ -5,9 +5,10 @@ export type TRegisterDev = {
 } & TDev;
 
 export type TDev = {
+  _id: string | null;
   name: string | null;
   city: string | null;
-  technologies: string[] | null;
+  technologies: string | null;
   avatarURL: string | null;
   userGithub?: string | null;
 };

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TDev } from '../../pages/cadastrar-dev/cadastrar-dev.model';
 
 @Component({
@@ -10,11 +10,22 @@ import { TDev } from '../../pages/cadastrar-dev/cadastrar-dev.model';
 })
 export class CardDevComponent {
 
-  @Input()
-  data!: TDev;
+  @Input({ required: true })
+  data: TDev = { _id: '', name: '', city: '', technologies: '', avatarURL: '', userGithub: '' };
+  @Output() delete = new EventEmitter<TDev>();
+  @Output() edit = new EventEmitter<TDev>();
+
 
   openGitHub() {
     window.open('https://github.com/' + this.data.userGithub, '_blank');
+  }
+
+  editCard(dev: TDev) {
+    this.edit.emit(dev);
+  }
+
+  deleteCard(dev: TDev) {
+    this.delete.emit(dev);
   }
 
 }

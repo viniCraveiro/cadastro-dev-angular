@@ -23,7 +23,6 @@ export class InputGroupDirective implements AfterViewInit {
       this.renderer.addClass(input, 'input-form');
       if (input.disabled) {
         this.renderer.addClass(input, 'input-form-disabled');
-        // this.renderer.addClass(label, 'label-form-disabled');
       }
     }
 

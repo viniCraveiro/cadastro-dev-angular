@@ -15,7 +15,6 @@ export const initialState: IDevState = {
 export const devReducer = createReducer(
   initialState,
   on(cadastrarDevActions.loadDevs, (actualState) => {
-    console.log('--->', actualState);
     return {
       ...actualState,
     };
@@ -30,6 +29,19 @@ export const devReducer = createReducer(
     return {
       ...actualState,
       devs: [...actualState.devs, dev],
+    };
+  }),
+  on(cadastrarDevActions.removeDev, (actualState, { id }) => {
+    return {
+      ...actualState,
+      devs: actualState.devs.filter((d) => d._id !== id),
+    };
+  }
+  ),
+  on(cadastrarDevActions.editDev, (actualState, dev) => {
+    return {
+      ...actualState,
+      devs: actualState.devs.map((d) => d._id === dev._id ? dev : d),
     };
   }),
 );

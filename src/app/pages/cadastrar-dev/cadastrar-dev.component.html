@@ -1,47 +1,67 @@
 <app-topbar />
 <div class="container">
   <div class="container-form">
-    <form class="form" [formGroup]="form">
+    <form class="form" [formGroup]="form" (ngSubmit)="saveDev()">
       <button type="button" id="btnRegisterGithub" class="button-register-github">
         <i class="fa-brands fa-github" style="font-size: 21px;"></i>
         <span>Cadastrar com GitHub</span>
       </button>
       <div appInputGroup>
         <label for="iptUserGithub">Usuário Github</label>
-        <input name="iptUserGithub" type="text" disabled />
+        <input name="iptUserGithub" type="text" formControlName="userGithub" />
       </div>
       <div class="spacer"></div>
       <div appInputGroup>
         <label for="iptAvatar">Avatar (URL)</label>
-        <input name="iptAvatar" type="text" />
+        <input name="iptAvatar" type="text" formControlName="avatarURL" />
       </div>
       <div appInputGroup>
         <label for="iptName">Nome</label>
-        <input name="iptName" type="text" />
+        <input name="iptName" type="text" formControlName="name"
+          [ngClass]="{'invalid-input': control('name')?.errors && submitted}" />
+        <span *ngIf="control('name')?.hasError('required') && submitted"
+          [ngClass]="{'span-error': control('name')?.hasError('required') && submitted}">O campo Nome deve ser
+          informado.</span>
       </div>
       <div appInputGroup>
         <label for="iptEmail">Email</label>
-        <input name="iptEmail" type="email" />
+        <input name="iptEmail" type="email" formControlName="email"
+          [ngClass]="{'invalid-input': control('email')?.errors && submitted}" />
+        <span *ngIf="control('email')?.hasError('required') && submitted"
+          [ngClass]="{'span-error': control('email')?.hasError('required') && submitted}">O campo Email deve ser
+          informado.</span>
+        <span *ngIf="control('email')?.hasError('email') && submitted"
+          [ngClass]="{'span-error': control('email')?.hasError('email') && submitted}">Informe um email
+          valido.</span>
       </div>
       <div appInputGroup>
         <label for="iptCity">Cidade</label>
-        <input name="iptCity" type="text" />
+        <input name="iptCity" type="text" formControlName="city"
+          [ngClass]="{'invalid-input': control('city')?.errors && submitted}" />
+        <span *ngIf="control('city')?.hasError('required') && submitted"
+          [ngClass]="{'span-error': control('city')?.hasError('required') && submitted}">O campo Cidade deve ser
+          informado.</span>
       </div>
       <div class="spacer"></div>
       <p class="info textCenter">PROFISSIONAL</p>
       <div appInputGroup>
         <label for="">Formação</label>
-        <input type="text" />
+        <input type="text" formControlName="formation" />
       </div>
       <div appInputGroup>
         <label for="">Tecnologias</label>
-        <input type="text" />
+        <input type="text" formControlName="technologies"
+          [ngClass]="{'invalid-input': control('technologies')?.errors && submitted}" />
+        <span *ngIf="control('technologies')?.hasError('required') && submitted"
+          [ngClass]="{'span-error': control('technologies')?.hasError('required') && submitted}">O campo Tecnologias
+          deve ser
+          informado.</span>
       </div>
-      <button class="button-register">Cadastrar</button>
+      <button class="button-register" type="submit">{{isEditing ? "Salvar" : "Cadastrar"}}</button>
     </form>
     <div class="card-dev">
       @for (dev of devs; track $index) {
-      <app-card-dev [data]="dev" />
+      <app-card-dev [data]="dev" (edit)="onEditCard($event)" (delete)="onDeleteCard($event)" />
       }
     </div>
   </div>

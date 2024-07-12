@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { ToastrService } from 'ngx-toastr';
 import { InputGroupDirective } from '../../common/directives/input/input-group.directive';
 import { CardDevComponent } from '../../components/card-dev/card-dev.component';
 import { TopbarComponent } from '../../layout/topbar/topbar.component';
@@ -26,31 +27,36 @@ import { devsSelector } from './state/cadastrar-dev.selectors';
 export class CadastrarDevComponent implements OnInit {
   form!: FormGroup;
   devs: TDev[] = [];
+  isEditing = false;
+  submitted = false;
 
   cadastrarDevService = inject(CadastrarDevService);
   store = inject(Store);
   devs$ = this.store.select(devsSelector);
+  toast = inject(ToastrService);
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      userGithub: new FormControl(''),
+      _id: new FormControl(''),
+      userGithub: new FormControl({ value: null, disabled: true }),
       avatarURL: new FormControl(''),
-      name: new FormControl(''),
-      email: new FormControl(''),
-      city: new FormControl(''),
+      name: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      city: new FormControl('', [Validators.required]),
       formation: new FormControl(''),
-      technologies: new FormArray([]),
+      technologies: new FormControl('', [Validators.required]),
     });
 
     this.getAllDevs();
   }
+
+
 
   getAllDevs() {
     this.store.dispatch(cadastrarDevActions.loadDevs());
     this.devs$
       .subscribe({
         next: (devs) => {
-          console.log('value:', devs);
           this.devs = devs;
         },
         error: (error) => {
@@ -59,8 +65,16 @@ export class CadastrarDevComponent implements OnInit {
       });
   }
 
-  registerDev() {
-    this.store.dispatch(cadastrarDevActions.registerDev(this.form.getRawValue()));
+  saveDev() {
+    this.submitted = true;
+    if (!this.form.valid) return;
+    if (this.isEditing) {
+      this.store.dispatch(cadastrarDevActions.editDev(this.form.getRawValue()));
+      this.resetForm();
+    } else {
+      this.store.dispatch(cadastrarDevActions.registerDev(this.form.getRawValue()));
+      this.resetForm();
+    }
   }
 
   removeDev(id: string) {
@@ -69,6 +83,26 @@ export class CadastrarDevComponent implements OnInit {
 
   editDev(dev: TDev) {
     this.store.dispatch(cadastrarDevActions.editDev(dev));
+  }
+
+  onEditCard(card: TDev) {
+    this.isEditing = true;
+    this.form.patchValue(card);
+  }
+
+  onDeleteCard(card: TDev) {
+    this.removeDev(card._id!);
+  }
+
+  control(control: string) {
+    if (!this.form.controls[control]) return;
+    return this.form.controls[control];
+  }
+
+  resetForm() {
+    this.form.reset();
+    this.submitted = false;
+    this.isEditing = false;
   }
 
 }

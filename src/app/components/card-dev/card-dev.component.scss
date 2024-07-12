@@ -1,10 +1,9 @@
 @import '../../../variables.scss';
 
 .container {
-  width: 15rem;
   flex-direction: column;
   padding-top: 3rem;
-
+  min-height: 200px;
 }
 
 .container-info {
@@ -41,6 +40,7 @@
   display: grid;
   grid-template-columns: 3fr 0.5fr 0.5fr;
   gap: 0.7rem;
+  min-height: 25px;
 }
 
 .container-footer button {

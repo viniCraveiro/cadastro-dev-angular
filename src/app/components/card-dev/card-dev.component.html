@@ -1,23 +1,25 @@
 <div class="flex container">
   <div class="container-info">
-    <img [src]="data.avatarURL || 'https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg'" class="avatar" alt="">
+    <img
+      [src]="data.avatarURL || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'"
+      class="avatar" alt="">
     <p>{{data.name}}</p>
     <p>{{data.city}}</p>
     <p>{{data.technologies}}</p>
     <div class="flex container-footer">
-      @if (data.userGithub !== '') {
+      @if (data.userGithub !== '' && data.userGithub !== null) {
       <p><button (click)="openGitHub()">Acessar GitHub</button></p>
       } @else {
       <p></p>
       }
       <span>
-        <button>
+        <button (click)="editCard(data)">
           <i class="fa-regular fa-pen-to-square" style="color: #4299E1;"></i>
         </button>
       </span>
 
       <span>
-        <button>
+        <button (click)="deleteCard(data)">
           <i class="fa-regular fa-trash-can" style="color: #E53E3E;"></i>
         </button>
       </span>
